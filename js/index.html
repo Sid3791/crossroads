@@ -1,0 +1,145 @@
+<html>
+    <title>
+        Crossroads Project
+    </title>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <script>
+            async function submitQuestion() {
+                const culture1 = document.getElementById("culture1").value;
+                const culture2 = document.getElementById("culture2").value;
+                const primInput = document.getElementById("primInput").value;
+
+                if (culture1 !== culture2) {
+                    try {
+                        // Disable the button to prevent multiple submissions
+                        const button = document.getElementById("submitquestion");
+                        button.disabled = true;
+                    
+                        const res = await fetch("http://localhost:3000/compareContrast", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                cultureOne: culture1,
+                                cultureTwo: culture2,
+                                question: primInput,
+                                maxTokens: 200
+                            })
+                        });
+                    
+                        if (!res.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                    
+                        const data = await res.json();
+                    
+                        // Update the columns with the response
+                        document.getElementById("column1").querySelector("p").textContent = data[0];
+                        document.getElementById("column2").querySelector("p").textContent = data[1];
+                        document.getElementById("column3").querySelector("p").textContent = data[2];
+                    
+                        // Re-enable the button
+                        button.disabled = false;
+                    } catch (error) {
+                        console.error("Error:", error);
+                        document.getElementById("compareAndContrast").innerHTML = "Error: Unable to fetch data. Please try again later.";
+                    }
+                } else {
+                    alert("Please select two different cultures.");
+                }
+            }
+        </script>
+        <script src="server.js" type="module"></script>
+    </head>
+    <body>
+        <!-- Top Navigation Bar -->
+        <div id="headtop">
+            <a class="header2" href="main.html">Home</a>    
+            <a class="header2" style="color: #9195e8;" href="index.html">Compare and Contrast</a>
+        </div>
+      
+        <!-- Title -->
+        <h1 style="text-align: center;">Cultural Perspectives AI</h1>
+      
+        <!-- Input + Selects + Button -->
+        <!-- Input + Selects + Button -->
+        <div class="container2">
+            <textarea placeholder="Enter JUST your question here." id="primInput"></textarea>
+        
+            <!-- Centered Flexbox Row -->
+            <div class="row" style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+              <label for="culture1" style="color: white; margin-right: 10px;">Cultural Perspectives:</label>
+            
+              <select class="drop" id="culture1" style="margin-right: 10px;">
+                <option value="" disabled selected>Click Me!</option>
+                <option value="White American">White American</option>
+                <option value="African-American">African-American</option>
+                <option value="Indian">Indian</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Arab">Arab</option>
+                <option value="Slav">Slav</option>
+                <option value="Western European">Western European</option>
+                <option value="Native American">Native American</option>
+                <option value="German">German</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Pacific-Islander">Pacific-Islander</option>
+              </select>
+            
+              <span style="margin: 0 10px; color: white;">and</span>
+            
+              <select class="drop" id="culture2" style="margin-right: 10px;">
+                <option value="" disabled selected>Click Me!</option>
+                <option value="White American">White American</option>
+                <option value="African-American">African-American</option>
+                <option value="Indian">Indian</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Arab">Arab</option>
+                <option value="Slav">Slav</option>
+                <option value="Western European">Western European</option>
+                <option value="Native American">Native American</option>
+                <option value="German">German</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Pacific-Islander">Pacific-Islander</option>
+              </select>
+            
+              <button id="submitquestion" onclick="submitQuestion()">↑</button>
+            </div>
+          </div>
+      
+        <!-- AI Response Section -->
+        <div class="container2">
+            <h2 style="color: white;">AI Response</h2>
+            <div class="row">
+                <div class="column" id="column1">
+                    <div class="title">Perspective 1</div>
+                    <p></p>
+                </div>
+                <div class="column" id="column2">
+                    <div class="title">Perspective 2</div>
+                    <p></p>
+                </div>
+            </div>
+            <div class="single-column" id="column3">
+                <div class="title">Compare and Contrast</div>
+                <p></p>
+            </div>
+        </div>
+      
+        <!-- Script Logic -->
+        <script>
+            // Default text
+            let text1 = "Waiting for input and/or response.";
+            let text2 = "Waiting for input and/or response.";
+            let text3 = "Waiting for input and/or response.";
+            
+            // Insert into DOM
+            document.getElementById("column1").querySelector("p").textContent = text1;
+            document.getElementById("column2").querySelector("p").textContent = text2;
+            document.getElementById("column3").querySelector("p").textContent = text3;
+        </script>
+    </body>
+</html>

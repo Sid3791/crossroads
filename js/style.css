@@ -1,0 +1,148 @@
+/* === Global Styles === */
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #060419;
+    color: white;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* === Header === */
+#headtop {
+    background-color: #100030;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 0 20px;
+    border-bottom: 1px solid #32217f;
+}
+
+.header2 {
+    color: lightblue;
+    font-size: 1.8rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.header2:hover {
+    color: #9195e8;
+}
+
+/* === Dropdown Select === */
+.drop {
+    height: 40px;
+    min-width: 180px;
+    font-size: 1rem;
+    background-color: #1e1b2f;
+    color: white;
+    border: 1px solid #32217f;
+    border-radius: 8px;
+    padding: 5px 10px;
+    appearance: none;
+    cursor: pointer;
+}
+
+.drop option {
+    background-color: #1e1b2f;
+    color: white;
+}
+
+/* === Text Area === */
+textarea {
+    width: 90%;
+    max-width: 600px;
+    height: 150px;
+    border-radius: 10px;
+    border: none;
+    padding: 15px;
+    background-color: #1f1a3a;
+    color: white;
+    font-size: 1rem;
+}
+
+/* === Containers === */
+.container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 30px 20px;
+}
+
+/* === Row of Perspectives === */
+.row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 1100px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.column {
+    flex: 1 1 300px;
+    background-color: #1e1e2f;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+/* === Compare & Contrast Box === */
+.single-column {
+    background-color: #292b45;
+    padding: 20px;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 10px;
+    color: white;
+    overflow-wrap: break-word;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* === Section Titles === */
+.title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #a8c5ff;
+}
+
+/* === Button === */
+#submitquestion {
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #11916d;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submitquestion:hover {
+    background-color: #06654a;
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    .single-column {
+        width: 100%;
+    }
+
+    .drop {
+        min-width: 100%;
+    }
+}
